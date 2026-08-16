@@ -1,544 +1,1060 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="tr">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#0f172a">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#111827">
 <title>Portföyüm</title>
-
 <style>
-:root{
- --bg:#f4f7fb;
- --card:#fff;
- --text:#0f172a;
- --muted:#64748b;
- --line:#e2e8f0;
- --blue:#2563eb;
- --green:#059669;
- --red:#dc2626;
- --amber:#d97706
-}
-
 *{box-sizing:border-box}
-
-body{
- margin:0;
- background:var(--bg);
- color:var(--text);
- font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
- padding-bottom:85px
-}
-
-button,input,select,textarea{
- font:inherit
-}
-
-button{
- border:0;
- cursor:pointer
-}
-
-.wrap{
- max-width:900px;
- margin:auto;
- padding:14px
-}
-
-header{
- background:linear-gradient(135deg,#0f172a,#1e293b);
- color:white;
- border-radius:0 0 28px 28px;
- padding:18px 0 20px
-}
-
-.brand{
- font-size:25px;
- font-weight:900
-}
-
-.sub{
- font-size:12px;
- color:#cbd5e1
-}
-
-.top{
- display:flex;
- justify-content:space-between;
- align-items:center
-}
-
-.card{
- background:var(--card);
- border:1px solid var(--line);
- border-radius:20px;
- padding:16px;
- margin:12px 0;
- box-shadow:0 5px 18px #0f172a0b
-}
-
-.hero{
- background:linear-gradient(135deg,#111827,#1e293b);
- color:#fff;
- border:0
-}
-
-.hero .muted{
- color:#cbd5e1
-}
-
-.muted{
- font-size:12px;
- color:var(--muted)
-}
-
-.big{
- font-size:31px;
- font-weight:900;
- margin:4px 0
-}
-
-.title{
- font-size:18px;
- font-weight:850
-}
-
-.section{
- display:flex;
- gap:10px;
- align-items:center
-}
-
-.icon{
- font-size:23px
-}
-
-.grid{
- display:grid;
- grid-template-columns:repeat(2,1fr);
- gap:10px
-}
-
-.grid3{
- display:grid;
- grid-template-columns:repeat(3,1fr);
- gap:10px
-}
-
-.stat{
- background:#fff;
- border:1px solid var(--line);
- border-radius:15px;
- padding:12px
-}
-
-.stat b{
- display:block;
- font-size:17px;
- margin-top:4px
-}
-
-.green{color:var(--green)}
-.red{color:var(--red)}
-.amber{color:var(--amber)}
-
-label{
- display:block;
- font-size:12px;
- font-weight:800;
- color:#334155;
- margin:10px 0 5px
-}
-
-input,select,textarea{
- width:100%;
- padding:12px;
- border:1px solid #cbd5e1;
- border-radius:12px;
- background:#fff;
- color:var(--text)
-}
-
-textarea{
- min-height:70px
-}
-
-.btn{
- padding:11px 13px;
- border-radius:12px;
- font-weight:800
-}
-
-.primary{
- background:var(--blue);
- color:#fff
-}
-
-.secondary{
- background:#eff6ff;
- color:#1d4ed8
-}
-
-.danger{
- background:#fee2e2;
- color:#991b1b
-}
-
-.warning{
- background:#fef3c7;
- color:#92400e
-}
-
-.ghost{
- background:#f8fafc;
- color:#334155;
- border:1px solid var(--line)
-}
-
-.full{
- width:100%
-}
-
-.btnrow{
- display:flex;
- gap:8px;
- flex-wrap:wrap
-}
-
-.btnrow>*{
- flex:1;
- min-width:110px
-}
-
-.view{
- display:none
-}
-
-.view.active{
- display:block
-}
-
-.item{
- padding:12px 0;
- border-bottom:1px solid var(--line)
-}
-
-.item:last-child{
- border:0
-}
-
-.empty{
- text-align:center;
- padding:25px;
- color:var(--muted)
-}
-
-.progress{
- height:8px;
- background:#e2e8f0;
- border-radius:99px;
- overflow:hidden;
- margin-top:7px
-}
-
-.progress span{
- display:block;
- height:100%;
- background:linear-gradient(90deg,#2563eb,#22c55e)
-}
-
-.chart{
- width:100%;
- height:230px;
- display:block
-}
-
-.pill{
- font-size:11px;
- background:#eff6ff;
- color:#1d4ed8;
- padding:5px 8px;
- border-radius:99px;
- font-weight:800
-}
-
-.hint{
- font-size:12px;
- color:#475569;
- background:#f8fafc;
- border:1px dashed #cbd5e1;
- border-radius:13px;
- padding:10px
-}
-
-.actions{
- display:flex;
- gap:7px;
- margin-top:8px
-}
-
-.actions button{
- padding:8px 10px;
- font-size:11px
-}
-
-nav{
- position:fixed;
- bottom:0;
- left:0;
- right:0;
- z-index:20;
- background:white;
- border-top:1px solid var(--line);
- display:flex;
- justify-content:center;
- padding:7px 4px calc(7px + env(safe-area-inset-bottom));
- box-shadow:0 -5px 20px #0001
-}
-
-nav button{
- flex:1;
- max-width:170px;
- background:transparent;
- color:#64748b;
- font-size:10px;
- font-weight:800
-}
-
-nav button.active{
- color:var(--blue)
-}
-
-nav span{
- display:block;
- font-size:19px
-}
-
-.lock{
- position:fixed;
- inset:0;
- background:#0f172a;
- z-index:99;
- display:none;
- align-items:center;
- justify-content:center;
- padding:20px
-}
-
-.lock.show{
- display:flex
-}
-
-.lockbox{
- background:white;
- border-radius:24px;
- padding:22px;
- width:min(420px,100%)
-}
-
-table{
- width:100%;
- border-collapse:collapse;
- font-size:12px
-}
-
-th,td{
- text-align:left;
- padding:9px 5px;
- border-bottom:1px solid var(--line)
-}
-
-@media(max-width:600px){
- .grid3{
-  grid-template-columns:1fr 1fr
- }
-
- .big{
-  font-size:28px
- }
-}
+body{margin:0;background:#f3f6fa;color:#111827;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;padding-bottom:80px}
+header{background:linear-gradient(135deg,#111827,#1e3a8a);color:white;padding:22px 16px;border-radius:0 0 25px 25px}
+.wrap{max-width:900px;margin:auto;padding:14px}
+h1,h2,h3{margin:0 0 8px}
+.card{background:white;border:1px solid #e5e7eb;border-radius:20px;padding:16px;margin:12px 0;box-shadow:0 5px 20px #0000000b}
+.hero{background:linear-gradient(135deg,#111827,#1e3a8a);color:white;border:0}
+.muted{font-size:12px;color:#64748b}
+.hero .muted{color:#cbd5e1}
+.big{font-size:32px;font-weight:900;margin:5px 0}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.stat{background:white;border:1px solid #e5e7eb;border-radius:15px;padding:13px}
+.stat b{display:block;font-size:17px;margin-top:5px}
+.green{color:#059669}.red{color:#dc2626}.blue{color:#2563eb}
+label{display:block;font-size:12px;font-weight:800;margin:10px 0 5px;color:#374151}
+input,select,textarea{width:100%;padding:12px;border:1px solid #cbd5e1;border-radius:12px;background:white;font:inherit}
+textarea{min-height:75px}
+button{font:inherit;border:0;cursor:pointer}
+.btn{padding:11px 14px;border-radius:12px;font-weight:800}
+.primary{background:#2563eb;color:white}
+.secondary{background:#dbeafe;color:#1d4ed8}
+.danger{background:#fee2e2;color:#991b1b}
+.gray{background:#f1f5f9;color:#334155}
+.btnrow{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.btnrow button{flex:1;min-width:110px}
+.view{display:none}.view.active{display:block}
+.item{padding:12px 0;border-bottom:1px solid #e5e7eb}
+.item:last-child{border-bottom:0}
+.pill{display:inline-block;padding:4px 8px;border-radius:20px;background:#eff6ff;color:#1d4ed8;font-size:11px;font-weight:800}
+.progress{height:8px;background:#e5e7eb;border-radius:20px;overflow:hidden;margin-top:6px}
+.progress span{display:block;height:100%;background:#2563eb}
+canvas{width:100%;height:230px;display:block}
+nav{position:fixed;bottom:0;left:0;right:0;background:white;border-top:1px solid #e5e7eb;display:flex;z-index:50;padding:7px 3px}
+nav button{flex:1;background:none;color:#64748b;font-size:10px;font-weight:800}
+nav button.active{color:#2563eb}
+nav span{display:block;font-size:19px;margin-bottom:2px}
+.empty{text-align:center;padding:25px;color:#64748b}
+.lock{position:fixed;inset:0;background:#111827;z-index:100;display:none;align-items:center;justify-content:center;padding:20px}
+.lock.show{display:flex}
+.lockbox{background:white;padding:22px;border-radius:22px;width:min(400px,100%)}
+table{width:100%;border-collapse:collapse;font-size:12px}
+th,td{padding:9px 4px;text-align:left;border-bottom:1px solid #e5e7eb}
+@media(max-width:600px){.grid3{grid-template-columns:1fr 1fr}.big{font-size:28px}}
 </style>
 </head>
 
 <body>
 
 <header>
-<div class="wrap" style="padding-top:0;padding-bottom:0">
-<div class="top">
-
-<div>
-<div class="brand">💰 Portföyüm</div>
-<div class="sub">Kişisel yatırım takip ve analiz</div>
-</div>
-
-<div style="font-size:30px">📈</div>
-
-</div>
+<div class="wrap">
+<h1>💰 Portföyüm</h1>
+<div style="font-size:12px;color:#cbd5e1">Kişisel yatırım takip ve analiz uygulaması</div>
 </div>
 </header>
 
 <div id="lock" class="lock">
-
 <div class="lockbox">
-
-<div class="section">
-<span class="icon">🔒</span>
-
-<div>
-<div class="title">Portföyüm kilitli</div>
-<div class="muted">PIN girerek devam et.</div>
-</div>
-
-</div>
-
-<input
- id="pinIn"
- type="password"
- inputmode="numeric"
- maxlength="8"
- placeholder="4–8 hane"
- style="margin:15px 0"
->
-
-<button
- class="btn primary full"
- onclick="unlock()"
->
-Kilidi aç
-</button>
-
-<div
- id="pinErr"
- class="red"
- style="margin-top:8px"
-></div>
-
+<h2>🔒 Uygulama kilitli</h2>
+<div class="muted">PIN'inizi girin.</div>
+<input id="pinInput" type="password" inputmode="numeric" maxlength="8" placeholder="PIN" style="margin:15px 0">
+<button class="btn primary" style="width:100%" onclick="unlock()">Kilidi Aç</button>
+<div id="pinError" class="red" style="margin-top:8px"></div>
 </div>
 </div>
 
 <main class="wrap">
 
+<!-- ÖZET -->
 <section id="home" class="view active">
 
 <div class="card hero">
-
-<div class="muted">
-Toplam portföy değeri
-</div>
-
-<div class="big" id="total">
-₺0
-</div>
-
-<div id="profit">
-Kâr/Zarar: ₺0
-</div>
-
-<div class="muted" id="cost">
-Maliyet: ₺0
-</div>
-
+<div class="muted">Toplam Portföy Değeri</div>
+<div class="big" id="totalValue">₺0,00</div>
+<div id="totalProfit">Kâr/Zarar: ₺0,00</div>
+<div class="muted" id="totalCost">Maliyet: ₺0,00</div>
 </div>
 
 <div class="grid3">
-
-<div class="stat">
-<span class="muted">Getiri</span>
-<b id="rate">%0</b>
-</div>
-
-<div class="stat">
-<span class="muted">Bu ay yatırım</span>
-<b id="mInv">₺0</b>
-</div>
-
-<div class="stat">
-<span class="muted">Bu yıl yatırım</span>
-<b id="yInv">₺0</b>
-</div>
-
+<div class="stat"><span class="muted">Getiri</span><b id="returnRate">%0</b></div>
+<div class="stat"><span class="muted">Bu Ay</span><b id="monthInvest">₺0</b></div>
+<div class="stat"><span class="muted">Bu Yıl</span><b id="yearInvest">₺0</b></div>
 </div>
 
 <div class="card">
-
-<div class="section">
-
-<span class="icon">🥧</span>
-
-<div>
-<div class="title">Portföy dağılımı</div>
-<div class="muted">
-Altın, fon, döviz, hisse ve diğerleri
-</div>
-</div>
-
-</div>
-
-<canvas
- id="donut"
- class="chart"
-></canvas>
-
-<div
- id="legend"
- class="muted"
-></div>
-
+<h3>🥧 Portföy Dağılımı</h3>
+<div class="muted">Yatırım araçlarının güncel değeri</div>
+<canvas id="donut"></canvas>
+<div id="legend"></div>
 </div>
 
 <div class="card">
-
-<div class="section">
-
-<span class="icon">📈</span>
-
-<div>
-<div class="title">Aylık yatırım</div>
+<h3>📈 Aylık Yatırımlar</h3>
 <div class="muted">Son 12 ay</div>
-</div>
-
-</div>
-
-<canvas
- id="monthly"
- class="chart"
-></canvas>
-
+<canvas id="monthlyChart"></canvas>
 </div>
 
 <div class="card">
-
-<div class="section">
-
-<span class="icon">💹</span>
-
-<div>
-<div class="title">Kâr / Zarar</div>
-<div class="muted">Varlık bazında</div>
-</div>
-
-</div>
-
-<canvas
- id="profitChart"
- class="chart"
-></canvas>
-
+<h3>💹 Varlık Kâr/Zararları</h3>
+<canvas id="profitChart"></canvas>
 </div>
 
 <div class="card">
-
-<div class="section">
-
-<span class="icon">🎯</span>
-
-<div>
-<div class="title">Hedef dağılım</div>
-</div>
-
-</div>
-
-<div id="targetsView"></div>
-
+<h3>🎯 Hedef Dağılım</h3>
+<div id="targetSummary"></div>
 </div>
 
 </section>
+
+<!-- İŞLEM EKLE -->
+<section id="add" class="view">
+
+<div class="card">
+<h2 id="formTitle">➕ Yeni İşlem</h2>
+
+<label>İşlem Türü</label>
+<select id="action">
+<option value="buy">Alış / Yatırım</option>
+<option value="sell">Satış / Çekim</option>
+<option value="income">Faiz / Temettü / Gelir</option>
+</select>
+
+<label>Tarih</label>
+<input id="date" type="date">
+
+<label>Kategori</label>
+<select id="category" onchange="updateSubtypes()"></select>
+
+<label>Alt Tür</label>
+<select id="subtype"></select>
+
+<label>Varlık / Fon Kodu</label>
+<input id="assetName" placeholder="Örn. AFT, Gram Altın, USD">
+
+<label>Miktar</label>
+<input id="quantity" type="number" step="any" oninput="calculateAmount()">
+
+<label>Birim İşlem Değeri (TL)</label>
+<input id="unitPrice" type="number" step="any" oninput="calculateAmount()">
+
+<label>Toplam İşlem Tutarı (TL)</label>
+<input id="amount" type="number" step="any">
+
+<label>Güncel Toplam Değer (TL)</label>
+<input id="currentValue" type="number" step="any" placeholder="İstersen buraya güncel değeri yaz">
+
+<label>Not</label>
+<textarea id="note" placeholder="İsteğe bağlı"></textarea>
+
+<div class="btnrow">
+<button class="btn primary" onclick="saveTransaction()">💾 Kaydet</button>
+<button class="btn gray" onclick="clearForm()">Temizle</button>
+</div>
+
+</div>
+</section>
+
+<!-- PORTFÖY -->
+<section id="portfolio" class="view">
+
+<div class="card">
+<h2>💼 Portföyüm</h2>
+<div class="muted">Tüm yatırım araçların</div>
+<input id="assetSearch" placeholder="🔎 Varlık ara..." oninput="renderPortfolio()" style="margin:12px 0">
+<div id="assetList"></div>
+</div>
+
+</section>
+
+<!-- FİYATLAR -->
+<section id="prices" class="view">
+
+<div class="card">
+<h2>💹 Güncel Değerler</h2>
+<div class="muted">Fon, altın, döviz ve diğer yatırım araçlarının güncel değerlerini buradan gir.</div>
+
+<div style="margin-top:12px" class="card">
+<b>📊 Fonlar</b>
+<div class="muted">Örneğin AFT fonunun güncel pay fiyatını yazabilirsin.</div>
+</div>
+
+<div id="priceList"></div>
+
+<button class="btn primary" style="width:100%;margin-top:10px" onclick="savePrices()">💾 Fiyatları Kaydet</button>
+</div>
+
+</section>
+
+<!-- GEÇMİŞ -->
+<section id="history" class="view">
+
+<div class="card">
+<h2>🧾 İşlem Geçmişi</h2>
+
+<div class="grid" style="margin:12px 0">
+<input id="historySearch" placeholder="🔎 Ara..." oninput="renderHistory()">
+<select id="historyFilter" onchange="renderHistory()">
+<option value="">Tümü</option>
+<option value="buy">Alış</option>
+<option value="sell">Satış</option>
+<option value="income">Gelir</option>
+</select>
+</div>
+
+<div id="historyList"></div>
+</div>
+
+</section>
+
+<!-- RAPORLAR -->
+<section id="reports" class="view">
+
+<div class="card">
+<h2>📅 Aylık Rapor</h2>
+<div class="muted">Hangi ay hangi yatırım aracına ne kadar yatırım yaptığını gör.</div>
+
+<label>Ay</label>
+<select id="reportMonth" onchange="renderReports()"></select>
+
+<div id="monthReport" style="margin-top:12px"></div>
+</div>
+
+<div class="card">
+<h2>📊 Yıllık Rapor</h2>
+<label>Yıl</label>
+<select id="reportYear" onchange="renderReports()"></select>
+<div id="yearReport" style="margin-top:12px"></div>
+</div>
+
+<div class="card">
+<h2>🎯 Hedef Dağılım</h2>
+<div class="muted">Portföyünün hedef yüzdelerini belirle.</div>
+<div id="targetInputs"></div>
+<button class="btn secondary" style="width:100%;margin-top:10px" onclick="saveTargets()">Hedefleri Kaydet</button>
+</div>
+
+<div class="card">
+<h2>🔒 PIN</h2>
+<div class="muted">Uygulamayı açarken PIN sorulsun.</div>
+<input id="newPin" type="password" inputmode="numeric" maxlength="8" placeholder="4-8 haneli PIN" style="margin-top:10px">
+<div class="btnrow">
+<button class="btn secondary" onclick="setPin()">PIN Kaydet</button>
+<button class="btn danger" onclick="removePin()">PIN Kaldır</button>
+</div>
+</div>
+
+<div class="card">
+<h2>💾 Yedekleme</h2>
+<div class="muted">Verilerini cihazına kaydet veya daha sonra geri yükle.</div>
+<div class="btnrow">
+<button class="btn secondary" onclick="backup()">⬇️ Yedek İndir</button>
+<button class="btn secondary" onclick="document.getElementById('backupFile').click()">⬆️ Yedek Yükle</button>
+</div>
+<input id="backupFile" type="file" accept=".json" hidden onchange="restore(event)">
+</div>
+
+</section>
+
+</main>
+
+<nav>
+<button class="active" data-page="home" onclick="showPage('home')"><span>🏠</span>Özet</button>
+<button data-page="add" onclick="showPage('add')"><span>➕</span>İşlem</button>
+<button data-page="portfolio" onclick="showPage('portfolio')"><span>💼</span>Portföy</button>
+<button data-page="prices" onclick="showPage('prices')"><span>💹</span>Fiyat</button>
+<button data-page="reports" onclick="showPage('reports')"><span>📊</span>Rapor</button>
+</nav>
+
+<script>
+const STORAGE="PORTFOYUM_V4";
+
+const categories={
+"Altın":["Gram Altın","Çeyrek Altın","Yarım Altın","Tam Altın","Cumhuriyet Altını","Bilezik","Diğer"],
+"Gümüş":["Gram Gümüş","Külçe Gümüş","Diğer"],
+"Platin":["Gram Platin","Külçe Platin","Diğer"],
+"Paladyum":["Gram Paladyum","Külçe Paladyum","Diğer"],
+"Fon":["Altın Fonu","Hisse Fonu","Para Piyasası Fonu","Borçlanma Fonu","Katılım Fonu","Değişken Fon","Yabancı Fon","Diğer"],
+"Hisse":["BIST Hisse","Yabancı Hisse","ETF","Diğer"],
+"Döviz":["USD","EUR","GBP","CHF","Diğer"],
+"Vadeli Mevduat":["TL Vadeli","USD Vadeli","EUR Vadeli","Diğer"],
+"Kripto":["Bitcoin","Ethereum","USDT","Diğer"],
+"Diğer":["Diğer"]
+};
+
+const icons={
+"Altın":"🥇","Gümüş":"🥈","Platin":"⚪","Paladyum":"⚫",
+"Fon":"📊","Hisse":"📈","Döviz":"💱",
+"Vadeli Mevduat":"🏦","Kripto":"₿","Diğer":"🔹"
+};
+
+let data=JSON.parse(localStorage.getItem(STORAGE)||"[]");
+let prices=JSON.parse(localStorage.getItem(STORAGE+"_PRICES")||"{}");
+let targets=JSON.parse(localStorage.getItem(STORAGE+"_TARGETS")||"{}");
+let editId=null;
+
+const $=id=>document.getElementById(id);
+
+function money(n){
+ return new Intl.NumberFormat("tr-TR",{style:"currency",currency:"TRY",maximumFractionDigits:2}).format(Number(n)||0);
+}
+
+function number(n){
+ return new Intl.NumberFormat("tr-TR",{maximumFractionDigits:4}).format(Number(n)||0);
+}
+
+function today(){
+ return new Date().toISOString().slice(0,10);
+}
+
+function save(){
+ localStorage.setItem(STORAGE,JSON.stringify(data));
+}
+
+function init(){
+
+ $("date").value=today();
+
+ $("category").innerHTML=Object.keys(categories)
+ .map(x=>`<option>${x}</option>`).join("");
+
+ updateSubtypes();
+ setupReports();
+ renderAll();
+ checkPin();
+}
+
+function updateSubtypes(){
+
+ let c=$("category").value;
+
+ $("subtype").innerHTML=(categories[c]||[])
+ .map(x=>`<option>${x}</option>`).join("");
+}
+
+function calculateAmount(){
+
+ let q=Number($("quantity").value)||0;
+ let p=Number($("unitPrice").value)||0;
+
+ if(q&&p){
+  $("amount").value=(q*p).toFixed(2);
+ }
+}
+
+function saveTransaction(){
+
+ let amount=Number($("amount").value)||0;
+
+ if(!amount){
+  alert("İşlem tutarını gir.");
+  return;
+ }
+
+ let item={
+  id:editId||Date.now(),
+  action:$("action").value,
+  date:$("date").value||today(),
+  category:$("category").value,
+  subtype:$("subtype").value,
+  name:$("assetName").value.trim()||$("subtype").value,
+  quantity:Number($("quantity").value)||0,
+  unitPrice:Number($("unitPrice").value)||0,
+  amount:amount,
+  currentValue:Number($("currentValue").value)||0,
+  note:$("note").value.trim()
+ };
+
+ if(editId){
+  let index=data.findIndex(x=>x.id===editId);
+  if(index>=0)data[index]=item;
+ }else{
+  data.push(item);
+ }
+
+ save();
+ clearForm();
+ renderAll();
+ showPage("history");
+}
+
+function clearForm(){
+
+ editId=null;
+ $("formTitle").textContent="➕ Yeni İşlem";
+
+ $("action").value="buy";
+ $("date").value=today();
+ $("assetName").value="";
+ $("quantity").value="";
+ $("unitPrice").value="";
+ $("amount").value="";
+ $("currentValue").value="";
+ $("note").value="";
+}
+
+function editTransaction(id){
+
+ let x=data.find(a=>a.id===id);
+ if(!x)return;
+
+ editId=id;
+
+ $("action").value=x.action;
+ $("date").value=x.date;
+ $("category").value=x.category;
+ updateSubtypes();
+ $("subtype").value=x.subtype;
+ $("assetName").value=x.name;
+ $("quantity").value=x.quantity;
+ $("unitPrice").value=x.unitPrice;
+ $("amount").value=x.amount;
+ $("currentValue").value=x.currentValue;
+ $("note").value=x.note;
+
+ $("formTitle").textContent="✏️ İşlemi Düzenle";
+ showPage("add");
+}
+
+function deleteTransaction(id){
+
+ if(!confirm("Bu işlemi silmek istediğine emin misin?"))return;
+
+ data=data.filter(x=>x.id!==id);
+ save();
+ renderAll();
+}
+
+function showPage(page){
+
+ document.querySelectorAll(".view")
+ .forEach(x=>x.classList.remove("active"));
+
+ $(page).classList.add("active");
+
+ document.querySelectorAll("nav button")
+ .forEach(x=>x.classList.toggle("active",x.dataset.page===page));
+
+ renderAll();
+ window.scrollTo(0,0);
+}
+
+function assetGroups(){
+
+ let groups={};
+
+ data.forEach(x=>{
+
+  let key=x.name||x.subtype;
+
+  if(!groups[key]){
+   groups[key]={
+    name:key,
+    category:x.category,
+    quantity:0,
+    cost:0,
+    value:0
+   };
+  }
+
+  if(x.action==="buy"){
+   groups[key].quantity+=x.quantity;
+   groups[key].cost+=x.amount;
+  }
+
+  if(x.action==="sell"){
+   groups[key].quantity-=x.quantity;
+   groups[key].cost-=x.amount;
+  }
+
+  if(x.currentValue>0){
+   groups[key].value=x.currentValue;
+  }
+
+  if(prices[key]>0){
+   groups[key].value=Math.max(0,groups[key].quantity*prices[key]);
+  }
+
+ });
+
+ Object.values(groups).forEach(g=>{
+  if(!g.value)g.value=g.cost;
+ });
+
+ return Object.values(groups).filter(x=>Math.abs(x.quantity)>0.0000001||x.cost>0);
+}
+
+function totals(){
+
+ let assets=assetGroups();
+
+ let cost=assets.reduce((s,x)=>s+x.cost,0);
+ let value=assets.reduce((s,x)=>s+x.value,0);
+ let profit=value-cost;
+
+ return {assets,cost,value,profit};
+}
+
+function renderHome(){
+
+ let t=totals();
+
+ $("totalValue").textContent=money(t.value);
+ $("totalCost").textContent="Maliyet: "+money(t.cost);
+
+ $("totalProfit").textContent=
+  "Kâr/Zarar: "+money(t.profit);
+
+ $("totalProfit").className=t.profit>=0?"green":"red";
+
+ let rate=t.cost?((t.profit/t.cost)*100):0;
+ $("returnRate").textContent=(rate>=0?"+":"")+rate.toFixed(2)+"%";
+
+ let now=new Date();
+ let ym=now.toISOString().slice(0,7);
+ let y=now.getFullYear().toString();
+
+ let month=data.filter(x=>x.date.startsWith(ym)&&x.action==="buy")
+ .reduce((s,x)=>s+x.amount,0);
+
+ let year=data.filter(x=>x.date.startsWith(y)&&x.action==="buy")
+ .reduce((s,x)=>s+x.amount,0);
+
+ $("monthInvest").textContent=money(month);
+ $("yearInvest").textContent=money(year);
+
+ drawDonut(t.assets);
+ drawMonthly();
+ drawProfit(t.assets);
+ renderTargetSummary(t.assets);
+}
+
+function drawDonut(assets){
+
+ let canvas=$("donut");
+ let ctx=canvas.getContext("2d");
+
+ let w=canvas.width=canvas.clientWidth*2;
+ let h=canvas.height=230*2;
+
+ ctx.clearRect(0,0,w,h);
+
+ let total=assets.reduce((s,x)=>s+x.value,0);
+
+ if(!total){
+  ctx.font="28px sans-serif";
+  ctx.textAlign="center";
+  ctx.fillText("Henüz veri yok",w/2,h/2);
+  $("legend").innerHTML="";
+  return;
+ }
+
+ let cx=w/2,cy=h/2,r=75*2;
+ let start=-Math.PI/2;
+
+ assets.forEach((a,i)=>{
+
+  let angle=(a.value/total)*Math.PI*2;
+
+  ctx.beginPath();
+  ctx.moveTo(cx,cy);
+  ctx.arc(cx,cy,r,start,start+angle);
+  ctx.closePath();
+
+  ctx.fillStyle=`hsl(${i*45%360},70%,50%)`;
+  ctx.fill();
+
+  start+=angle;
+ });
+
+ ctx.globalCompositeOperation="destination-out";
+ ctx.beginPath();
+ ctx.arc(cx,cy,38*2,0,Math.PI*2);
+ ctx.fill();
+ ctx.globalCompositeOperation="source-over";
+
+ $("legend").innerHTML=assets.map((a,i)=>`
+ <div style="margin:5px 0">
+ ${icons[a.category]||"🔹"} <b>${a.name}</b>
+ — ${money(a.value)}
+ — ${(a.value/total*100).toFixed(1)}%
+ </div>`).join("");
+}
+
+function drawMonthly(){
+
+ let c=$("monthlyChart");
+ let ctx=c.getContext("2d");
+
+ let w=c.width=c.clientWidth*2;
+ let h=c.height=230*2;
+
+ ctx.clearRect(0,0,w,h);
+
+ let months=[];
+
+ for(let i=11;i>=0;i--){
+  let d=new Date();
+  d.setMonth(d.getMonth()-i);
+  months.push(d.toISOString().slice(0,7));
+ }
+
+ let vals=months.map(m=>
+  data.filter(x=>x.date.startsWith(m)&&x.action==="buy")
+  .reduce((s,x)=>s+x.amount,0)
+ );
+
+ let max=Math.max(...vals,1);
+
+ ctx.strokeStyle="#2563eb";
+ ctx.lineWidth=5;
+
+ ctx.beginPath();
+
+ vals.forEach((v,i)=>{
+  let x=30*2+i*((w-60*2)/(vals.length-1));
+  let y=h-30*2-(v/max)*(h-70*2);
+
+  if(i===0)ctx.moveTo(x,y);
+  else ctx.lineTo(x,y);
+ });
+
+ ctx.stroke();
+
+ ctx.fillStyle="#64748b";
+ ctx.font="22px sans-serif";
+
+ vals.forEach((v,i)=>{
+  let x=30*2+i*((w-60*2)/(vals.length-1));
+  let y=h-30*2-(v/max)*(h-70*2);
+
+  ctx.fillText(v?Math.round(v):"",x-15,y-10);
+ });
+}
+
+function drawProfit(assets){
+
+ let c=$("profitChart");
+ let ctx=c.getContext("2d");
+
+ let w=c.width=c.clientWidth*2;
+ let h=c.height=230*2;
+
+ ctx.clearRect(0,0,w,h);
+
+ if(!assets.length)return;
+
+ let max=Math.max(...assets.map(x=>Math.abs(x.value-x.cost)),1);
+
+ assets.slice(0,8).forEach((a,i)=>{
+
+  let p=a.value-a.cost;
+  let x=15*2+i*(w/assets.length);
+  let bh=Math.abs(p)/max*(h-70*2);
+  let y=p>=0?h/2-bh:h/2;
+
+  ctx.fillStyle=p>=0?"#059669":"#dc2626";
+  ctx.fillRect(x,y,w/assets.length-12*2,bh);
+
+  ctx.fillStyle="#374151";
+  ctx.font="18px sans-serif";
+  ctx.fillText(a.name.slice(0,10),x,h-15*2);
+ });
+}
+
+function renderPortfolio(){
+
+ let list=assetGroups();
+ let q=($("assetSearch").value||"").toLowerCase();
+
+ list=list.filter(x=>x.name.toLowerCase().includes(q));
+
+ if(!list.length){
+  $("assetList").innerHTML='<div class="empty">Henüz portföy verisi yok.</div>';
+  return;
+ }
+
+ $("assetList").innerHTML=list.map(x=>{
+
+  let p=x.value-x.cost;
+
+  return `
+  <div class="item">
+   <b>${icons[x.category]||"🔹"} ${x.name}</b>
+   <div class="muted">${x.category}</div>
+   <div style="margin-top:6px">
+    Miktar: <b>${number(x.quantity)}</b>
+   </div>
+   <div>
+    Maliyet: <b>${money(x.cost)}</b>
+   </div>
+   <div>
+    Güncel: <b>${money(x.value)}</b>
+   </div>
+   <div class="${p>=0?"green":"red"}">
+    Kâr/Zarar: <b>${money(p)}</b>
+   </div>
+  </div>`;
+ }).join("");
+}
+
+function renderHistory(){
+
+ let q=($("historySearch").value||"").toLowerCase();
+ let filter=$("historyFilter").value;
+
+ let list=data.filter(x=>
+  (!filter||x.action===filter)&&
+  ((x.name+" "+x.category+" "+x.subtype)
+   .toLowerCase().includes(q))
+ ).sort((a,b)=>b.date.localeCompare(a.date));
+
+ if(!list.length){
+  $("historyList").innerHTML='<div class="empty">İşlem bulunamadı.</div>';
+  return;
+ }
+
+ let labels={buy:"Alış",sell:"Satış",income:"Gelir"};
+
+ $("historyList").innerHTML=list.map(x=>`
+
+ <div class="item">
+  <div style="display:flex;justify-content:space-between">
+   <b>${icons[x.category]||"🔹"} ${x.name}</b>
+   <span class="pill">${labels[x.action]}</span>
+  </div>
+
+  <div class="muted">
+   ${x.date} · ${x.category}
+  </div>
+
+  <div style="margin-top:5px">
+   ${number(x.quantity)} adet/miktar · ${money(x.amount)}
+  </div>
+
+  ${x.note?`<div class="muted">${x.note}</div>`:""}
+
+  <div class="btnrow">
+   <button class="btn secondary" onclick="editTransaction(${x.id})">✏️ Düzenle</button>
+   <button class="btn danger" onclick="deleteTransaction(${x.id})">🗑️ Sil</button>
+  </div>
+ </div>
+
+ `).join("");
+}
+
+function renderPrices(){
+
+ let assets=assetGroups();
+
+ if(!assets.length){
+  $("priceList").innerHTML='<div class="empty">Önce bir yatırım işlemi ekle.</div>';
+  return;
+ }
+
+ $("priceList").innerHTML=assets.map(x=>`
+
+ <div class="item">
+  <b>${icons[x.category]||"🔹"} ${x.name}</b>
+  <div class="muted">${x.category} · Miktar: ${number(x.quantity)}</div>
+
+  <label>Güncel birim değer (TL)</label>
+
+  <input
+   class="price-input"
+   data-name="${encodeURIComponent(x.name)}"
+   type="number"
+   step="any"
+   value="${prices[x.name]||""}"
+   placeholder="Örn. 125.50"
+  >
+
+  <div class="muted" style="margin-top:5px">
+   Güncel toplam:
+   <b id="pv-${encodeURIComponent(x.name)}">${money(x.value)}</b>
+  </div>
+ </div>
+
+ `).join("");
+}
+
+function savePrices(){
+
+ document.querySelectorAll(".price-input").forEach(input=>{
+
+  let name=decodeURIComponent(input.dataset.name);
+  let value=Number(input.value)||0;
+
+  if(value>0)prices[name]=value;
+  else delete prices[name];
+
+ });
+
+ localStorage.setItem(STORAGE+"_PRICES",JSON.stringify(prices));
+
+ renderAll();
+
+ alert("Güncel değerler kaydedildi.");
+}
+
+function setupReports(){
+
+ let years=[...new Set([
+  new Date().getFullYear().toString(),
+  ...data.map(x=>x.date.slice(0,4))
+ ])].sort().reverse();
+
+ $("reportYear").innerHTML=years.map(y=>`<option>${y}</option>`).join("");
+
+ let months=[];
+
+ for(let i=0;i<24;i++){
+  let d=new Date();
+  d.setMonth(d.getMonth()-i);
+  let value=d.toISOString().slice(0,7);
+  if(!months.includes(value))months.push(value);
+ }
+
+ $("reportMonth").innerHTML=months.map(m=>{
+  let [y,mo]=m.split("-");
+  return `<option value="${m}">${mo}/${y}</option>`;
+ }).join("");
+}
+
+function renderReports(){
+
+ setupReports();
+
+ let month=$("reportMonth").value;
+ let year=$("reportYear").value;
+
+ let md=data.filter(x=>x.date.startsWith(month)&&x.action==="buy");
+
+ let groups={};
+
+ md.forEach(x=>{
+  let k=x.name;
+  if(!groups[k])groups[k]={amount:0,quantity:0};
+  groups[k].amount+=x.amount;
+  groups[k].quantity+=x.quantity;
+ });
+
+ $("monthReport").innerHTML=Object.keys(groups).length?
+ Object.entries(groups).map(([name,x])=>`
+ <div class="item">
+  <b>${name}</b>
+  <div>Yatırım: <b>${money(x.amount)}</b></div>
+  <div>Miktar: <b>${number(x.quantity)}</b></div>
+ </div>`).join("")
+ :'<div class="empty">Bu ay yatırım kaydı yok.</div>';
+
+ let yd=data.filter(x=>x.date.startsWith(year)&&x.action==="buy");
+
+ let total=yd.reduce((s,x)=>s+x.amount,0);
+
+ $("yearReport").innerHTML=`
+ <div class="stat">
+  <span class="muted">${year} toplam yatırım</span>
+  <b>${money(total)}</b>
+ </div>
+ <div style="margin-top:10px">
+ ${yd.length} işlem kaydı bulundu.
+ </div>`;
+}
+
+function renderTargets(){
+
+ let cats=Object.keys(categories);
+
+ $("targetInputs").innerHTML=cats.map(c=>`
+ <div style="margin:10px 0">
+  <div style="display:flex;justify-content:space-between">
+   <b>${icons[c]||"🔹"} ${c}</b>
+   <span>${targets[c]||0}%</span>
+  </div>
+  <input class="target-input" data-category="${encodeURIComponent(c)}" type="number" min="0" max="100" value="${targets[c]||0}">
+ </div>
+ `).join("");
+}
+
+function saveTargets(){
+
+ document.querySelectorAll(".target-input").forEach(x=>{
+  let c=decodeURIComponent(x.dataset.category);
+  targets[c]=Number(x.value)||0;
+ });
+
+ localStorage.setItem(STORAGE+"_TARGETS",JSON.stringify(targets));
+
+ renderAll();
+ alert("Hedefler kaydedildi.");
+}
+
+function renderTargetSummary(assets){
+
+ let total=assets.reduce((s,x)=>s+x.value,0);
+
+ if(!total){
+  $("targetSummary").innerHTML='<div class="empty">Portföy verisi oluştuğunda burada hedefler görünecek.</div>';
+  return;
+ }
+
+ let by={};
+
+ assets.forEach(x=>{
+  by[x.category]=(by[x.category]||0)+x.value;
+ });
+
+ $("targetSummary").innerHTML=Object.keys(categories).map(c=>{
+
+  let actual=total?(by[c]||0)/total*100:0;
+  let target=Number(targets[c])||0;
+
+  return `
+  <div style="margin:10px 0">
+   <div style="display:flex;justify-content:space-between">
+    <b>${icons[c]||"🔹"} ${c}</b>
+    <span>${actual.toFixed(1)}% / hedef ${target}%</span>
+   </div>
+   <div class="progress">
+    <span style="width:${Math.min(actual,100)}%"></span>
+   </div>
+  </div>`;
+ }).join("");
+}
+
+function renderAll(){
+
+ renderHome();
+ renderPortfolio();
+ renderHistory();
+ renderPrices();
+ renderReports();
+ renderTargets();
+}
+
+function setPin(){
+
+ let pin=$("newPin").value.trim();
+
+ if(!/^\d{4,8}$/.test(pin)){
+  alert("PIN 4-8 rakam olmalı.");
+  return;
+ }
+
+ localStorage.setItem(STORAGE+"_PIN",pin);
+ $("newPin").value="";
+
+ alert("PIN kaydedildi.");
+}
+
+function removePin(){
+
+ localStorage.removeItem(STORAGE+"_PIN");
+ $("newPin").value="";
+
+ alert("PIN kaldırıldı.");
+}
+
+function checkPin(){
+
+ let pin=localStorage.getItem(STORAGE+"_PIN");
+
+ if(pin)$("lock").classList.add("show");
+}
+
+function unlock(){
+
+ let saved=localStorage.getItem(STORAGE+"_PIN");
+ let entered=$("pinInput").value;
+
+ if(saved===entered){
+
+  $("lock").classList.remove("show");
+  $("pinInput").value="";
+  $("pinError").textContent="";
+
+ }else{
+
+  $("pinError").textContent="PIN yanlış.";
+ }
+}
+
+function backup(){
+
+ let backupData={
+  version:4,
+  transactions:data,
+  prices:prices,
+  targets:targets,
+  date:new Date().toISOString()
+ };
+
+ let blob=new Blob(
+  [JSON.stringify(backupData,null,2)],
+  {type:"application/json"}
+ );
+
+ let url=URL.createObjectURL(blob);
+
+ let a=document.createElement("a");
+ a.href=url;
+ a.download="portfoyum-yedek.json";
+ a.click();
+
+ URL.revokeObjectURL(url);
+}
+
+function restore(event){
+
+ let file=event.target.files[0];
+
+ if(!file)return;
+
+ let reader=new FileReader();
+
+ reader.onload=function(){
+
+  try{
+
+   let obj=JSON.parse(reader.result);
+
+   if(!Array.isArray(obj.transactions)){
+    alert("Geçersiz yedek dosyası.");
+    return;
+   }
+
+   data=obj.transactions||[];
+   prices=obj.prices||{};
+   targets=obj.targets||{};
+
+   save();
+
+   localStorage.setItem(STORAGE+"_PRICES",JSON.stringify(prices));
+   localStorage.setItem(STORAGE+"_TARGETS",JSON.stringify(targets));
+
+   renderAll();
+
+   alert("Yedek başarıyla yüklendi.");
+
+  }catch(e){
+   alert("Yedek dosyası okunamadı.");
+  }
+ };
+
+ reader.readAsText(file);
+}
+
+init();
+</script>
+
+</body>
+</html>
